@@ -1,7 +1,6 @@
 'use strict';
 
 //write your code here
-"use strict"
 let fs = require('fs');
 let input = ""
 let idx = 0
@@ -19,66 +18,49 @@ process.argv.forEach((val, index, array) =>  {
 
     case "list":
       console.log(`================TO-DO (LIST)=================`);
-    for (var i = 0; i < data.length; i++){
-      console.log(`${i+1}. ${data[i].status} ${data[i].task}`);
-      console.log(`---------------------------------------------`);
+      model.todos.findAll({order:['id']}).then(function(todos){
+        for (let index in todos){
+      console.log((`ID : ${todos[index].id} ${todos[index].name} complete:${todos[index].complete}`));
+      //console.log(`---------------------------------------------`);
     }
+  })
     break;
 
     case "add":
     if(array.length > 3){
-      let addTemp = ""
+      let addName = ""
       for(let i = 3; i < array.length; i++){
-        addTemp += array[i]+ " "
+        addName += array[i]+ " "
       }
-      addTemp = addTemp.substring(0,addTemp.length-1)
+      addName = addName.substring(0,addName.length-1)
 
-      data.push({task:addTemp,status:"belum selesai"})
-      //console.log(data);
-      jsonfile.writeFileSync(file, data)
-      console.log(`================TO-DO (ADD)================`);
-      console.log(`Memasukan ${addTemp} ke TODO list anda`);
-      console.log(`===========================================`);
-    }
+      model.todos.create({
+        name: addName,
+        complete: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+    })
+    console.log('Sudah ditambahkan list ${addTemp} ');
+  }
     break;
 
-//     case "task":
-//       if(array.length >3){
-//         console.log(`================TO-DO (TASK)=================`);
-//         console.log(data[array[3]-1]);
-//         console.log(`=============================================`);
-//       }
-//     break;
-//
-//     case "delete":
-//     if (array.length >3){
-//       data.splice(array[3]-1,1)
-//       jsonfile.writeFileSync(file, data)
-//     }
-//     console.log(`================TO-DO (DELETE)=================`);
-//     console.log("data telah dihapus");
-//     console.log(`===============================================`);
-//     break;
-//
-//     case "complete":
-//     if(array.length > 3){
-//       data[array[3]-1].status="[x]-(selesai)"
-//       jsonfile.writeFileSync(file, data)
-//       console.log(`================TO-DO (COMPLETE)=================`);
-//       console.log(`task ke: ${array[3]} sudah selesai`);
-//       console.log(`=================================================`);
-//     }
-//     break;
-//
-//     case "uncomplete":
-//     if(array.length > 3){
-//       data[array[3]-1].status="[ ]-(belum selesai)"
-//       jsonfile.writeFileSync(file, data)
-//       console.log(`================TO-DO (UNCOMPLETE)=================`);
-//       console.log(`task ke: ${array[3]} belum selesai`);
-//       console.log(`===================================================`);
-//     }
-//     break;
-//
- }
- });
+    case "delete":
+    if(array.length > 3){
+      let addName = ""
+      for(let i = 3; i < array.length; i++){
+        addName += array[i]+ " "
+      }
+      addName = addName.substring(0,addName.length-1)
+
+      model.todos.create({
+        name: addName,
+        complete: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+    })
+    console.log('Sudah ditambahkan list ${addTemp} ');
+  }
+    break;
+
+  }
+});
