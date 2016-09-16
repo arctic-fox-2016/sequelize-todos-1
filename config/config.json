@@ -1,0 +1,15 @@
+{
+  "development": {
+    "storage": "db/todos.db",
+    "dialect": "sqlite",
+    "logging": false
+  },
+  "test": {
+    "storage": "db/todos.db",
+    "dialect": "sqlite"
+  },
+  "production": {
+    "storage": "db/todos.db",
+    "dialect": "sqlite"
+  }
+}
