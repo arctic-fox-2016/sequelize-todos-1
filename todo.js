@@ -44,23 +44,26 @@ process.argv.forEach((val, index, array) =>  {
   }
     break;
 
-    case "delete":
-    if(array.length > 3){
-      let addName = ""
-      for(let i = 3; i < array.length; i++){
-        addName += array[i]+ " "
+  case "delete":
+    let found = false
+    let index = array[3]
+    model.todos.destroy({
+      where: {
+        id: index
       }
-      addName = addName.substring(0,addName.length-1)
+    });
+  break;
 
-      model.todos.create({
-        name: addName,
-        complete: false,
-        createdAt: new Date(),
-        updatedAt: new Date()
-    })
-    console.log('Sudah ditambahkan list ${addTemp} ');
-  }
-    break;
+  case "complete":
+    model.todos.update({
+      complete: true
+    },{
+        where: {
+          id:array[3]
+        }
+      })
+      console.log(`task id : ${array[3]} is completed`);
+  break;
 
   }
 });
