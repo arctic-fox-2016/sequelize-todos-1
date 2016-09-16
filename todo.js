@@ -24,60 +24,49 @@ process.argv.forEach((val, index, array) =>  {
  })
      break;
 
-    // case "add":
-    // if(array.length > 3){
-    //   let addTemp = ""
-    //   for(let i = 3; i < array.length; i++){
-    //     addTemp += array[i]+ " "
-    //   }
-    //   addTemp = addTemp.substring(0,addTemp.length-1)
-    //
-    //   data.push({task:addTemp,status:"belum selesai"})
-    //   //console.log(data);
-    //   jsonfile.writeFileSync(file, data)
-    //   console.log(`================TO-DO (ADD)================`);
-    //   console.log(`Memasukan ${addTemp} ke TODO list anda`);
-    //   console.log(`===========================================`);
-    // }
-    // break;
-    //
-    // case "task":
-    //   if(array.length >3){
-    //     console.log(`================TO-DO (TASK)=================`);
-    //     console.log(data[array[3]-1]);
-    //     console.log(`=============================================`);
-    //   }
-    // break;
-    //
-    // case "delete":
-    // if (array.length >3){
-    //   data.splice(array[3]-1,1)
-    //   jsonfile.writeFileSync(file, data)
-    // }
-    // console.log(`================TO-DO (DELETE)=================`);
-    // console.log("data telah dihapus");
-    // console.log(`===============================================`);
-    // break;
-    //
-    // case "complete":
-    // if(array.length > 3){
-    //   data[array[3]-1].status="[x]-(selesai)"
-    //   jsonfile.writeFileSync(file, data)
-    //   console.log(`================TO-DO (COMPLETE)=================`);
-    //   console.log(`task ke: ${array[3]} sudah selesai`);
-    //   console.log(`=================================================`);
-    // }
-    // break;
-    //
-    // case "uncomplete":
-    // if(array.length > 3){
-    //   data[array[3]-1].status="[ ]-(belum selesai)"
-    //   jsonfile.writeFileSync(file, data)
-    //   console.log(`================TO-DO (UNCOMPLETE)=================`);
-    //   console.log(`task ke: ${array[3]} belum selesai`);
-    //   console.log(`===================================================`);
-    // }
-    // break;
+
+     case "add":
+      if (array.length>3) {
+        let newTask = ""
+        for (let i = 3; i < array.length; i++) {
+            newTask += array[i]+ " "
+        }
+        newTask = newTask.substring(0,newTask.length-1)
+
+        model.todo.create(
+          {
+            task: newTask,
+            status: false,
+            createdAt: new Date(),
+            updatedAt: new Date()
+          }
+        )
+        console.log(`Added ${newTask} to your to do list`);
+      }
+    break;
+
+
+    case "delete":
+      let found = false
+      let index = array[3]
+      model.todo.destroy({
+        where: {
+          id: index
+        }
+      });
+    break;
+
+
+    case "complete":
+      model.todo.update({
+        status: true
+      },{
+          where: {
+            id:array[3]
+          }
+        })
+        console.log(`task id : ${array[3]} is completed`);
+    break;
 
 }
 });
