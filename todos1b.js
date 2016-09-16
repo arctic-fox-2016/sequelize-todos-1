@@ -14,7 +14,7 @@ process.argv.forEach((val,index,array)=> {
       // for (var i = 0; i < jsonContent.length; i++) {
       //   console.log(`${i+1}. ${jsonContent[i].status} ${jsonContent[i].task}`);
       // }
-          model.Users.findAll({
+      model.Users.findAll({
       attributes: ['full_name', 'task','status']
     }).then(function(users){
       for (var i = 0; i < users.length; i++) {
@@ -33,16 +33,11 @@ process.argv.forEach((val,index,array)=> {
         }
         tempAdd = tempAdd.substring(0,tempAdd.length-1)
 
-        model.Users.create({ first_name: 'Rani Grand Ta',task:tempAdd,status:'[ ]', updatedAt: new Date(),createdAt:new Date()}).then(function(task) {
+        model.Users.create({ full_name: 'Pale Men',task:tempAdd,status:'[ ]', updatedAt: new Date(),createdAt:new Date()}).then(function(task) {
         })
-      console.log(`Added ${tempAdd} to your to do list`);
+        console.log(`Added ${tempAdd} to your to do list`);
       }
 
-      // model.Users.create({ first_name: 'Rani Grand',task:'Nyangkul Duid',status:'[]', updatedAt: new Date(),createdAt:new Date()}).then(function(task) {
-      //   // you can now access the newly created task via the variable task
-      // })
-      
-      //console.log(`node todo.js list\nnode todo.js add <task_content>\nnode todo.js task <task_id>\nnode todo.js delete <task_id>\nnode todo.js complete <task_id>\nnode todo.js uncomplete <task_id>`)
     break;
     case "task":
       if(array.length>3){
@@ -50,14 +45,49 @@ process.argv.forEach((val,index,array)=> {
       }
     break;
     case "delete":
-      let found = false
-      if (array[3]<=jsonContent.length) {
-            jsonContent.splice(array[3]-1,1)
-            jsonfile.writeFileSync(file, jsonContent)
-            found=true
-            console.log(`data ${array[3]} has been deleted`);
-          }
-      else console.log("Task ID is not found")
+
+//     model.Users.findAll({
+//   where: {
+//     id: 1
+//   }
+// });
+//
+
+//
+
+//
+// model.Users.findAll().then(function(users) {
+//   for (let i=0;i<users.length;i++){
+//     if (array[3]==users[i].id) {
+//       model.Users.destroy({
+//         where: {
+//           id: array[3]
+//         }
+//       });
+//     }
+//   }
+// })
+
+model.Users.findAll({
+  where: {
+    id: array[3]
+}
+
+}).then(function(users) {
+  model.Users.destroy({
+        where: {
+          id: array[3]
+        }
+      });
+})
+      // if (array[3]<=jsonContent.length) {
+      //       jsonContent.splice(array[3]-1,1)
+      //       jsonfile.writeFileSync(file, jsonContent)
+      //       found=true
+      //       console.log(`data ${array[3]} has been deleted`);
+      //     }
+
+      //else console.log("Task ID is not found")
     break;
     case "complete":
       if (array[3]<=jsonContent.length) {
