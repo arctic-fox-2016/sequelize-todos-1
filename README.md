@@ -1,1 +1,1 @@
-# sequelize-todos-1
+# js-todos-1
