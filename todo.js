@@ -10,7 +10,7 @@ process.argv.forEach((val, index, array) =>  {
   switch (val){
     case "help":
     console.log(`================TO-DO (HELP)=================`);
-    console.log(`node todo.js list\nnode todo.js add <task_content>\nnode todo.js task <task_id>\nnode todo.js delete <task_id>\nnode todo.js complete <task_id>\nnode todo.js uncomplete <task_id>`);
+    console.log(`node todo.js list\nnode todo.js add <task_content>\nnode todo.js task <task_id>\nnode todo.js delete <task_id>\nnode todo.js complete <task_id>`);
     console.log(`=============================================`);
     break;
 
@@ -41,7 +41,6 @@ process.argv.forEach((val, index, array) =>  {
             updatedAt: new Date()
           }
         )
-        console.log(`Added ${newTask} to your to do list`);
       }
     break;
 
