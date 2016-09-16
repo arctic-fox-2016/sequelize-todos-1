@@ -24,7 +24,7 @@ class System {
     console.log('$ node todo.js remove <task_id>              >>>> Remove selected Task');
     console.log('$ node todo.js complete <task_id>            >>>> Set Task to complete');
     console.log('$ node todo.js uncomplete <task_id>          >>>> Set Task to uncomplete');
-    console.log('$ node todo.js viewuncompletedonly <task_id> >>>> Set list to see uncomplete only');
+    console.log('$ node todo.js suo <task_id>                 >>>> Set list to see uncomplete only');
 
   }
 
@@ -67,7 +67,7 @@ class System {
       let argu = process.argv[3]
       Task.setUncompleted(argu)
       break;
-    case 'viewuncompletedonly':
+    case 'suo':
       Task.viewUncompleted()
       break;
     case 'help':
