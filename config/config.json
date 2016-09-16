@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "ahmadi",
+    "password": "123456",
+    "database": "tododb",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "ahmadi",
+    "password": "123456",
+    "database": "tododb",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "ahmadi",
+    "password": "123456",
+    "database": "tododb",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
