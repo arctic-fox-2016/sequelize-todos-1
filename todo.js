@@ -118,9 +118,10 @@ class Controller {
             id: data.number
           }
         }).then(function(callback) {
-          Controller.header()
-          console.log(`Deleted task ID: ${data.number}`)
-          Controller.main()
+          Controller.read().then(function(db) {
+            console.log(`Deleted task ID: ${data.number}`)
+            Controller.main()
+          })
         })
       })
     })
