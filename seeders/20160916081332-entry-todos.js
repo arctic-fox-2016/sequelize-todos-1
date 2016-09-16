@@ -1,5 +1,7 @@
 'use strict';
 
+var Promise = require('bluebird');
+
 module.exports = {
   up: function (queryInterface, Sequelize) {
     /*
@@ -12,17 +14,43 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    queryInterface.bulkInsert('todo',
-    [
-      {task:"Bake a delicious cake",status: 0,createdAt:new Date(),updatedAt:new Date()},
-      {task:"Shutdown the computer",status: 0,createdAt:new Date(),updatedAt:new Date()},
-      {task:"Change the world",status: 0,createdAt:new Date(),updatedAt:new Date()},
-      {task:"Ride a bicycle",status: 0,createdAt:new Date(),updatedAt:new Date()},
-      {task:"Practice to make a DIY drone",status: 0,createdAt:new Date(),updatedAt:new Date()}
-  ])
+    var todosData = [{
+      task: 'brew a coffee',
+      status: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      task: 'take a medicine',
+      status: true,
+      createdAt: new Date(),
+      updatedAt: new Date()
+
+    },
+    {
+      task: 'do the DIY project',
+      status: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+
+    },
+    {
+      task: 'browsing a travel website',
+      status: true,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }];
+
+    return Promise.try(function () {
+    return queryInterface.bulkInsert({ tableName: 'todos', schema: 'public' }, todosData, {});
+    }).then(function () {
+      console.log("seed succesfull");
+    });
+
   },
 
   down: function (queryInterface, Sequelize) {
+    return queryInterface.bulkDelete({ tableName: 'todos', schema: 'public' }, null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
