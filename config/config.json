@@ -1,0 +1,20 @@
+{
+  "development": {
+    "storage": "db/todos.db",
+    "host": "localhost",
+    "dialect": "sqlite",
+    "script" : {
+                "seq": "node_modules/.bin/sequelize"},
+    "logging": false
+  },
+  "test": {
+    "storage": "db/todos.db",
+    "host": "localhost",
+    "dialect": "sqlite"
+  },
+  "production": {
+    "storage": "db/todos.db",
+    "host": "localhost",
+    "dialect": "sqlite"
+  }
+}
