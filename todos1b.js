@@ -25,22 +25,23 @@ process.argv.forEach((val,index,array)=> {
 
     break;
     case "add":
-      // if (array.length>3) {
-      //   let tempAdd = ""
-      //   for (let i = 3; i < array.length; i++) {
-      //       tempAdd += array[i]+ " "
-      //   }
-      //   tempAdd = tempAdd.substring(0,tempAdd.length-1)
-      //   jsonContent.push({task:tempAdd,status:"[ ]"})
-      //
-      //   jsonfile.writeFileSync(file, jsonContent)
-      // console.log(`Added ${tempAdd} to your to do list`);
-      // }
 
-      model.Users.create({ first_name: 'Rani Grand',task:'Nyangkul Duid',status:'[]', updatedAt: new Date(),createdAt:new Date()}).then(function(task) {
-        // you can now access the newly created task via the variable task
-      })
+      if (array.length>3) {
+        let tempAdd = ""
+        for (let i = 3; i < array.length; i++) {
+            tempAdd += array[i]+ " "
+        }
+        tempAdd = tempAdd.substring(0,tempAdd.length-1)
 
+        model.Users.create({ first_name: 'Rani Grand Ta',task:tempAdd,status:'[ ]', updatedAt: new Date(),createdAt:new Date()}).then(function(task) {
+        })
+      console.log(`Added ${tempAdd} to your to do list`);
+      }
+
+      // model.Users.create({ first_name: 'Rani Grand',task:'Nyangkul Duid',status:'[]', updatedAt: new Date(),createdAt:new Date()}).then(function(task) {
+      //   // you can now access the newly created task via the variable task
+      // })
+      
       //console.log(`node todo.js list\nnode todo.js add <task_content>\nnode todo.js task <task_id>\nnode todo.js delete <task_id>\nnode todo.js complete <task_id>\nnode todo.js uncomplete <task_id>`)
     break;
     case "task":
