@@ -12,12 +12,23 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert('Todos', [{
-      name: 'Cuci Baju',
-      status: '[X]',
-      createdAt : new Date(),
-      updatedAt : new Date()
-    }], {});
+    return queryInterface.bulkInsert('Todos',
+    [
+        {name: 'Cuci Rok'
+        ,status: '[ ]'
+        ,createdAt : new Date()
+        ,updatedAt : new Date()},
+        {name: 'Cuci Celana'
+        ,status: '[X]'
+        ,createdAt : new Date()
+        ,updatedAt : new Date()},
+        {name: 'Cuci Pacar'
+        ,status: '[ ]'
+        ,createdAt : new Date()
+        ,updatedAt : new Date()}
+
+    ]
+    , {});
   },
 
   down: function (queryInterface, Sequelize) {
