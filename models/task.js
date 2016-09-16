@@ -1,14 +1,14 @@
 'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var task = sequelize.define('task', {
+module.exports = function (sequelize, DataTypes) {
+  var tasks = sequelize.define('tasks', {
     name: DataTypes.STRING,
     completed: DataTypes.BOOLEAN
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: function (models) {
         // associations can be defined here
       }
     }
   });
-  return task;
+  return tasks;
 };

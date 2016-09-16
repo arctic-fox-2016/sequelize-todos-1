@@ -15,10 +15,17 @@ class System {
   }
 
   static printHome() {
-    console.log('$ babel-node todo.js list');
-    console.log('$ babel-node todo.js add <new_task>');
-    console.log('$ babel-node todo.js remove <task_id>');
-    console.log('$ babel-node todo.js complete <task_id>');
+    console.log('=============To Do List=================');
+    System.newLine(1)
+    console.log('Type some action :');
+    System.newLine(1)
+    console.log('$ node todo.js list                          >>>> View All Tasks');
+    console.log('$ node todo.js add <new_task>                >>>> Add New Task');
+    console.log('$ node todo.js remove <task_id>              >>>> Remove selected Task');
+    console.log('$ node todo.js complete <task_id>            >>>> Set Task to complete');
+    console.log('$ node todo.js uncomplete <task_id>          >>>> Set Task to uncomplete');
+    console.log('$ node todo.js viewuncompletedonly <task_id> >>>> Set list to see uncomplete only');
+
   }
 
   static newLine(count) {
@@ -28,20 +35,43 @@ class System {
   }
   static logicStart() {
     System.clearScreen()
+    System.newLine(1)
     System.printHome()
-    System.newLine(3)
+    System.newLine(1)
 
-    switch (process.argv[3]) {
+
+    // if (process.argv.length < 3) {
+    //   System.clearScreen()
+    //   System.printHome()
+    //   System.newLine(3)
+    //
+    // }
+    switch (process.argv[2]) {
     case 'list':
+      Task.viewList()
       break;
     case 'add':
-      let add = process.argv[3]
-      Task.writeTask(add)
+      let arg = process.argv
+      let arg3 = arg.slice(3, arg.length).join(" ")
+      Task.writeTask(arg3)
       break;
     case 'delete':
+      let argd = process.argv[3]
+      Task.deleteTask(argd)
       break;
     case 'complete':
+      let argc = process.argv[3]
+      Task.setCompleted(argc)
       break;
+    case 'uncomplete':
+      let argu = process.argv[3]
+      Task.setUncompleted(argu)
+      break;
+    case 'viewuncompletedonly':
+      Task.viewUncompleted()
+      break;
+    case 'help':
+      System.printHome()
     default:
       break;
     }
@@ -68,25 +98,72 @@ class Task {
     return this.completed
   }
   static writeTask(value) {
-    models.task.name = `'${value}'`
-    task.save().then(function () {})
+    models.tasks.create({
+      name: `${value}`,
+      completed: false
+    }).then(function (task) {})
+    console.log(`Task "${value}" was added !`);
+    Task.viewList()
+  }
+  static setCompleted(value) {
+    models.tasks.update({
+      completed: true
+    }, {
+      where: {
+        id: `${value}`
+      }
+    })
+    console.log(`Task no.${value} was set to complete`);
+    Task.viewList()
+  }
+
+  static setUncompleted(value) {
+    models.tasks.update({
+      completed: false
+    }, {
+      where: {
+        id: `${value}`
+      }
+    })
+    console.log(`Task no.${value} was set to uncomplete`);
+    Task.viewList()
+  }
+
+  static viewList() {
+    models.tasks.findAll({
+      order: 'id ASC'
+    }).then(function (tasks) {
+      console.log(`Status | Task id | Task name`);
+      for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].dataValues.completed == false) {
+          console.log(`[ ] ${tasks[i].dataValues.id}. ${tasks[i].dataValues.name}`);
+        } else {
+          console.log(`[x] ${tasks[i].dataValues.id}. ${tasks[i].dataValues.name}`);
+        }
+      }
+    });
+  }
+  static viewUncompleted() {
+    models.tasks.findAll({
+      order: 'id ASC'
+    }).then(function (tasks) {
+      console.log(`Task have to be done :`);
+      console.log(`Status | Task id | Task name`);
+      for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].dataValues.completed == false) {
+          console.log(`[ ] ${tasks[i].dataValues.id}. ${tasks[i].dataValues.name}`);
+        }
+      }
+    });
+  }
+  static deleteTask(value) {
+    models.tasks.destroy({
+      where: {
+        id: `${value}`
+      }
+    })
+    console.log(`Task no.${value} was deleted`);
+    Task.viewList()
   }
 }
-
-class List {
-  constructor(property = {}) {
-    this.list = []
-  }
-  set list(value) {
-    this.list.push(value)
-  }
-  get list() {
-    return this.list
-  }
-}
-
-
-
-
-
 System.logicStart()
