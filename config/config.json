@@ -1,0 +1,19 @@
+{
+  "development": {
+    "database": "database_development",
+    "storage": "db/todo.db",
+    "dialect": "sqlite"
+  },
+  "test": {
+
+    "database": "database_test",
+    "storage": "db/todo.db",
+    "dialect": "sqlite"
+  },
+  "production": {
+
+    "database": "database_production",
+    "storage": "db/todo.db",
+    "dialect": "sqlite"
+  }
+}
