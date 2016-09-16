@@ -18,10 +18,32 @@ class System {
       console.log('\n');
     }
   }
+  static logicStart() {
+    System.clearScreen()
+    System.printHome()
+    System.newLine(3)
+
+    switch (process.argv[2]) {
+    case 'list':
+      console.log('a');
+      break;
+    case 'add':
+      break;
+    case 'delete':
+      break;
+    case 'complete':
+      break;
+    default:
+      console.log('default');
+      break;
+    }
+
+  }
 }
 
+
 class Task {
-  constructor(property = {}) {
+  constructor(property) {
     this.name = property['name']
     this.completed = property['completed'] || false
   }
@@ -39,8 +61,20 @@ class Task {
   }
 }
 
+class List {
+  constructor(property = {}) {
+    this.list = []
+  }
+  set list(value) {
+    this.list.push(value)
+  }
+  get list() {
+    return this.list
+  }
+}
 
 
-System.clearScreen()
-System.printHome()
-System.newLine(3)
+
+
+
+System.logicStart()
