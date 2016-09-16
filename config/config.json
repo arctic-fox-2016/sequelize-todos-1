@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username" : "lilianti",
+    "password" : "lilianti",
+    "database": "tododb",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username" : "lilianti",
+    "password" : "lilianti",
+    "database": "tododb",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username" : "lilianti",
+    "password" : "lilianti",
+    "database": "tododb",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
