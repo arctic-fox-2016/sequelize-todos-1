@@ -57,12 +57,11 @@ class Generic{
 	}
 
 	static displayMenu(){
-		console.log("1. Add Task: example: node todo.js add 'makan buah'")
-		console.log("2. Delete Task: example: node todo.js delete '2'")
-		console.log("3. Display Task: example: node todo.js display")
-		console.log("4. Menu: example: node todo.js help")
-		console.log("5. Display Outstanding: node todo.js display-outstanding")
-		console.log("6. Display Completed: node todo.js display-completed")
+		console.log("1. To display current list of task: in Repl, type Generic.displayTask()")
+		console.log("2. To add new task to the list: in Repl, type Generic.addTask([TaskName])")
+		console.log("3. To delete task from the list: in Repl, type Generic.deleteTask([TaskId])")
+		console.log("4. To complete task: in Repl, type Generic.completeTask([TaskId])")
+		console.log("5. To uncomplete task: in Repl, type Generic.uncompleteTask([TaskId])")
 	}
 }
 
