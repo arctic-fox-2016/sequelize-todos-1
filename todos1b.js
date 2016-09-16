@@ -90,20 +90,41 @@ model.Users.findAll({
       //else console.log("Task ID is not found")
     break;
     case "complete":
-      if (array[3]<=jsonContent.length) {
-        jsonContent[array[3]-1].status="[X]"
-        jsonfile.writeFileSync(file, jsonContent)
-        console.log(`task id : ${array[3]} is completed`);
-      }
-      else console.log("Task ID is not found")
+
+
+    model.Users.findAll({
+      where: {
+        id: array[3]
+    }
+
+    }).then(function(users) {
+          model.Users.update({
+            status: "[X]",
+          }, {
+            where: {
+              id: array[3]
+            }
+          });
+
+    })
+
     break;
     case "uncomplete":
-    if (array[3]<=jsonContent.length) {
-      jsonContent[array[3]-1].status="[ ]"
-      jsonfile.writeFileSync(file, jsonContent)
-      console.log(`task id : ${array[3]} is uncompleted`);
-      }
-    else console.log("Task ID is not found")
+    model.Users.findAll({
+      where: {
+        id: array[3]
+    }
+
+    }).then(function(users) {
+          model.Users.update({
+            status: "[ ]",
+          }, {
+            where: {
+              id: array[3]
+            }
+          });
+
+    })
 
     break;
   }
