@@ -12,18 +12,18 @@ process.argv.forEach((val, index, array) =>  {
   switch (val){
     case "help":
     console.log(`================TO-DO (HELP)=================`);
-    console.log(`node todo.js list\nnode todo.js add <task_content>\nnode todo.js task <task_id>\nnode todo.js delete <task_id>\nnode todo.js complete <task_id>\nnode todo.js uncomplete <task_id>`);
+    console.log(`node todo.js list\nnode todo.js add <task_content>\nnode todo.js delete <task_id>\nnode todo.js complete <task_id>`);
     console.log(`=============================================`);
     break;
 
     case "list":
-      console.log(`================TO-DO (LIST)=================`);
-      model.todos.findAll({order:['id']}).then(function(todos){
-        for (let index in todos){
-      console.log((`ID : ${todos[index].id} ${todos[index].name} complete:${todos[index].complete}`));
-      //console.log(`---------------------------------------------`);
-    }
-  })
+    console.log(`================TO-DO (LIST)=================`);
+    model.todos.findAll({order:['id']}).then(function(todos){
+      for (let index in todos){
+        console.log((`ID : ${todos[index].id} ${todos[index].name} complete:${todos[index].complete}`));
+        //console.log(`---------------------------------------------`);
+      }
+    })
     break;
 
     case "add":
@@ -39,12 +39,12 @@ process.argv.forEach((val, index, array) =>  {
         complete: false,
         createdAt: new Date(),
         updatedAt: new Date()
-    })
-    console.log('Sudah ditambahkan list ${addTemp} ');
-  }
+      })
+      //console.log('Sudah ditambahkan list ${addTemp} ');
+    }
     break;
 
-  case "delete":
+    case "delete":
     let found = false
     let index = array[3]
     model.todos.destroy({
@@ -52,18 +52,18 @@ process.argv.forEach((val, index, array) =>  {
         id: index
       }
     });
-  break;
+    break;
 
-  case "complete":
+    case "complete":
     model.todos.update({
       complete: true
     },{
-        where: {
-          id:array[3]
-        }
-      })
-      console.log(`task id : ${array[3]} is completed`);
-  break;
+      where: {
+        id:array[3]
+      }
+    })
+    console.log(`task id : ${array[3]} is completed`);
+    break;
 
   }
 });
