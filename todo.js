@@ -1,4 +1,12 @@
 'use strict';
+const fs = require('fs');
+const repl = require('repl'); // optional
+// const sqlite = require('sqlite3').verbose();
+var file = 'tododb';
+// var db = new sqlite.Database(file);
+// let content = fs.readFileSync('contacts.json', 'utf8')
+// let parse = JSON.parse(content)
+let models = require('./models/index')
 
 class System {
 
@@ -23,18 +31,18 @@ class System {
     System.printHome()
     System.newLine(3)
 
-    switch (process.argv[2]) {
+    switch (process.argv[3]) {
     case 'list':
-      console.log('a');
       break;
     case 'add':
+      let add = process.argv[3]
+      Task.writeTask(add)
       break;
     case 'delete':
       break;
     case 'complete':
       break;
     default:
-      console.log('default');
       break;
     }
 
@@ -58,6 +66,10 @@ class Task {
   }
   get completed() {
     return this.completed
+  }
+  static writeTask(value) {
+    models.task.name = `'${value}'`
+    task.save().then(function () {})
   }
 }
 
