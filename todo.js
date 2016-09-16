@@ -3,12 +3,10 @@
 //write your code here
 "use strict"
 let fs = require('fs');
-let content = fs.readFileSync("data.json");
-let data = JSON.parse(content);
 let input = ""
 let idx = 0
 let jsonfile = require('jsonfile')
-var file = 'data.json'
+let model = require("./models/index")
 
 process.argv.forEach((val, index, array) =>  {
 
@@ -44,43 +42,43 @@ process.argv.forEach((val, index, array) =>  {
     }
     break;
 
-    case "task":
-      if(array.length >3){
-        console.log(`================TO-DO (TASK)=================`);
-        console.log(data[array[3]-1]);
-        console.log(`=============================================`);
-      }
-    break;
-
-    case "delete":
-    if (array.length >3){
-      data.splice(array[3]-1,1)
-      jsonfile.writeFileSync(file, data)
-    }
-    console.log(`================TO-DO (DELETE)=================`);
-    console.log("data telah dihapus");
-    console.log(`===============================================`);
-    break;
-
-    case "complete":
-    if(array.length > 3){
-      data[array[3]-1].status="[x]-(selesai)"
-      jsonfile.writeFileSync(file, data)
-      console.log(`================TO-DO (COMPLETE)=================`);
-      console.log(`task ke: ${array[3]} sudah selesai`);
-      console.log(`=================================================`);
-    }
-    break;
-
-    case "uncomplete":
-    if(array.length > 3){
-      data[array[3]-1].status="[ ]-(belum selesai)"
-      jsonfile.writeFileSync(file, data)
-      console.log(`================TO-DO (UNCOMPLETE)=================`);
-      console.log(`task ke: ${array[3]} belum selesai`);
-      console.log(`===================================================`);
-    }
-    break;
-
-}
-});
+//     case "task":
+//       if(array.length >3){
+//         console.log(`================TO-DO (TASK)=================`);
+//         console.log(data[array[3]-1]);
+//         console.log(`=============================================`);
+//       }
+//     break;
+//
+//     case "delete":
+//     if (array.length >3){
+//       data.splice(array[3]-1,1)
+//       jsonfile.writeFileSync(file, data)
+//     }
+//     console.log(`================TO-DO (DELETE)=================`);
+//     console.log("data telah dihapus");
+//     console.log(`===============================================`);
+//     break;
+//
+//     case "complete":
+//     if(array.length > 3){
+//       data[array[3]-1].status="[x]-(selesai)"
+//       jsonfile.writeFileSync(file, data)
+//       console.log(`================TO-DO (COMPLETE)=================`);
+//       console.log(`task ke: ${array[3]} sudah selesai`);
+//       console.log(`=================================================`);
+//     }
+//     break;
+//
+//     case "uncomplete":
+//     if(array.length > 3){
+//       data[array[3]-1].status="[ ]-(belum selesai)"
+//       jsonfile.writeFileSync(file, data)
+//       console.log(`================TO-DO (UNCOMPLETE)=================`);
+//       console.log(`task ke: ${array[3]} belum selesai`);
+//       console.log(`===================================================`);
+//     }
+//     break;
+//
+ }
+ });
